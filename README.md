@@ -2,12 +2,12 @@
 
 Take screenshots of websites
 
-> _Huginn ok Muninn_
-> _fljúga hverjan dag_
-> _Jörmungrund yfir;_
-> _óumk ek of Hugin,_
-> _at hann aftr né komi-t,_
-> _þó sjámk meir of Munin._
+>_Huginn ok Muninn_<br>
+_fljúga hverjan dag_<br>
+_Jörmungrund yfir;_<br>
+_óumk ek of Hugin,_<br>
+_at hann aftr né komi-t,_<br>
+_þó sjámk meir of Munin._
 
 ## Setup
 
