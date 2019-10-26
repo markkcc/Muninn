@@ -23,6 +23,7 @@ rbenv install 2.6.5
 ```
 
 You can confirm the install is working by using the `rbenv-doctor` script:
+
 `curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash`
 
 Debugging commands:
@@ -34,7 +35,9 @@ rbenv install -l #List versions of Ruby you can install
 rbenv global 2.6.5 #Use version 2.6.5 as your main ruby version
 ```
 
-#### 2. Download and install a web driver gem
+#### 2. Download and install dependencies.
+
+We first need a web driver library to interact with a browser.
 
 We can use either `Selenium-webdriver` or `Chrome-webdriver`.
 
@@ -42,7 +45,11 @@ Installing `Selenium-webdriver`:
 
 `gem install selenium-webdriver`
 
-#### 3. Downloading browser drivers
+We then need a WHOIS library to get domain registration information. We'll use the [Ruby WHOIS](https://github.com/weppos/whois) gem:
+
+`gem install whois`
+
+#### 3. Download browser drivers.
 
 To use Selenium with Firefox, we need the [Mozilla geckodriver](https://developer.mozilla.org/en-US/docs/Web/WebDriver) in our PATH.
 
@@ -51,9 +58,9 @@ Download the driver from here: https://github.com/mozilla/geckodriver/releases
 Unzip, untar, and add it to your PATH:
 `export PATH=$PATH:~/Tools`
 
-#### 4. Taking a screenshot
+#### 4. Take a screenshot.
 
-Using `Selenium-webdriver`:
+Using `Selenium-webdriver` in Ruby:
 
 ```ruby
 require 'selenium-webdriver'
@@ -63,4 +70,13 @@ driver.navigate.to 'https://mu.gl'
 driver.save_screenshot('screenshot.png')
 driver.quit
 ```
+#### 5. Get domain WHOIS info.
 
+```ruby
+require 'whois'
+
+# Domain WHOIS
+whois = Whois::Client.new
+whois.lookup("mu.gl")
+# => #<Whois::Record>
+```
