@@ -11,7 +11,7 @@ _þó sjámk meir of Munin._
 
 ## Setup
 
-1. Download and install `rvm` or `rbenv`.
+#### 1. Download and install `rvm` or `rbenv`.
 
 Installing `rbenv` on a macOS environment:
 
@@ -32,5 +32,35 @@ gem env #List rubygems version and info
 rbenv version #List rbenv version number and path
 rbenv install -l #List versions of Ruby you can install
 rbenv global 2.6.5 #Use version 2.6.5 as your main ruby version
+```
+
+#### 2. Download and install a web driver gem
+
+We can use either `Selenium-webdriver` or `Chrome-webdriver`.
+
+Installing `Selenium-webdriver`:
+
+`gem install selenium-webdriver`
+
+#### 3. Downloading browser drivers
+
+To use Selenium with Firefox, we need the [Mozilla geckodriver](https://developer.mozilla.org/en-US/docs/Web/WebDriver) in our PATH.
+
+Download the driver from here: https://github.com/mozilla/geckodriver/releases
+
+Unzip, untar, and add it to your PATH:
+`export PATH=$PATH:~/Tools`
+
+#### 4. Taking a screenshot
+
+Using `Selenium-webdriver`:
+
+```ruby
+require 'selenium-webdriver'
+
+driver = Selenium::WebDriver.for :firefox
+driver.navigate.to 'https://mu.gl'
+driver.save_screenshot('screenshot.png')
+driver.quit
 ```
 
