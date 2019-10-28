@@ -11,7 +11,7 @@ _þó sjámk meir of Munin._
 
 ## Setup
 
-#### 1. Download and install `rvm` or `rbenv`.
+### 1. Download and install `rvm` or `rbenv`.
 
 Installing `rbenv` on a macOS environment:
 
@@ -35,7 +35,7 @@ rbenv install -l #List versions of Ruby you can install
 rbenv global 2.6.5 #Use version 2.6.5 as your main ruby version
 ```
 
-#### 2. Download and install dependencies.
+### 2. Download and install dependencies.
 
 We first need a web driver library to interact with a browser.
 
@@ -49,7 +49,7 @@ We then need a WHOIS library to get domain registration information. We'll use t
 
 `gem install whois`
 
-#### 3. Download browser drivers.
+### 3. Download browser drivers.
 
 To use Selenium with Firefox, we need the [Mozilla geckodriver](https://developer.mozilla.org/en-US/docs/Web/WebDriver) in our PATH.
 
@@ -58,7 +58,7 @@ Download the driver from here: https://github.com/mozilla/geckodriver/releases
 Unzip, untar, and add it to your PATH:
 `export PATH=$PATH:~/Tools`
 
-#### 4. Take a screenshot.
+### 4. Take a screenshot.
 
 Using `Selenium-webdriver` in Ruby:
 
@@ -70,7 +70,7 @@ driver.navigate.to 'https://mu.gl'
 driver.save_screenshot('screenshot.png')
 driver.quit
 ```
-#### 5. Get domain WHOIS info.
+### 5. Get domain WHOIS info.
 
 ```ruby
 require 'whois'
@@ -81,7 +81,7 @@ whois.lookup("mu.gl")
 # => #<Whois::Record>
 ```
 
-#### 6. Configuring Rails
+### 6. Configuring Rails
 
 **1. Create a new rails app:**
 `rails new appname`
