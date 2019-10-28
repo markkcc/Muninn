@@ -39,7 +39,7 @@ rbenv global 2.6.5 #Use version 2.6.5 as your main ruby version
 
 We first need a web driver library to interact with a browser.
 
-We can use either `Selenium-webdriver` or `Chrome-webdriver`.
+We can use either [Selenium-webdriver](https://github.com/SeleniumHQ/selenium) or [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/).
 
 Installing `Selenium-webdriver`:
 
@@ -80,3 +80,44 @@ whois = Whois::Client.new
 whois.lookup("mu.gl")
 # => #<Whois::Record>
 ```
+
+#### 6. Configuring Rails
+
+**1. Create a new rails app:**
+`rails new appname`
+
+**2. To properly install Yarn:**
+
+https://yarnpkg.com/lang/en/docs/install/#debian-stable
+contains the following instructions:
+
+```bash
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
+sudo apt update && sudo apt install yarn
+```
+
+**3. Configure webpacker**
+
+`rails webpacker:install`
+
+**4. Launch server**
+
+Test everything is working:
+`rails s`
+
+**5. Add a route to the landing/index page**
+
+Generate the controller:
+`rails generate controller landing index`
+
+Include new page in the routing file as the app's root:
+in `config/routes.rb` add the following line:
+`root 'landing#index'`
+
+**6. Edit landing page**
+
+`vim app/views/landing/index.html.erb`
+
+
