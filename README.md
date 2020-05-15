@@ -13,6 +13,8 @@ _þó sjámk meir of Munin._
 
 ### 1. Download and install `rvm` or `rbenv`.
 
+On Linux, use [rbenv-installer](https://github.com/rbenv/rbenv-installer#rbenv-installer).
+
 Installing `rbenv` on a macOS environment:
 
 ```bash
@@ -57,6 +59,9 @@ Download the driver from here: https://github.com/mozilla/geckodriver/releases
 
 Unzip, untar, and add it to your PATH:
 `export PATH=$PATH:~/Tools`
+
+Or do it with this one-liner:
+`mkdir ~/Tools; curl -L https://github.com$(curl -sL https://github.com/mozilla/geckodriver/releases/latest | grep -i 'linux64.tar.gz\"' | cut -d \" -f 2) | tar -C ~/Tools -xzf - && export PATH=$PATH:~/Tools`
 
 ### 4. Take a screenshot.
 
