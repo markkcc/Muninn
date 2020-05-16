@@ -6,6 +6,8 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
+log/*
+tmp/*
 !/log/.keep
 !/tmp/.keep
 
@@ -18,6 +20,7 @@ config/master.key
 
 /.bundle
 /vendor/bundle
+/vendor/ruby/
 
 .rvmrc
 
@@ -39,3 +42,51 @@ yarn-debug.log*
 !/storage/.keep
 /public/uploads
 
+# various artifacts
+**.war
+*.rbc
+*.sassc
+.redcar/
+.sass-cache
+/config/config.yml
+/coverage.data
+/coverage/
+/db/*.javadb/
+/doc/api/
+/doc/app/
+/doc/features.html
+/doc/specs.html
+/public/cache
+/public/stylesheets/compiled
+/public/system/*
+/spec/tmp/*
+/cache
+/capybara*
+/capybara-*.html
+/gems
+/specifications
+rerun.txt
+pickle-email-*.html
+.zeus.sock
+
+# Mac finder artifacts
+.DS_Store
+
+# Netbeans project directory
+/nbproject/
+
+# RubyMine project files
+.idea
+
+# Textmate project files
+/*.tmproj
+
+# vim artifacts
+**.swp
+
+# Environment files that may contain sensitive data
+.env
+.powenv
+
+# tilde files are usually backup files from a text editor
+*~
