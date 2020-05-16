@@ -88,6 +88,32 @@ whois.lookup("mu.gl")
 
 ### 6. Configuring Rails
 
+Local dependencies:
+```
+sudo apt install postgresql libpq-dev
+```
+
+If deploying on Heroku, you need to switch to Postgres.
+```
+1. Install postgresql
+2. Create user and set a password
+3. edit config/database.yml
+4. rails db:create
+```
+
+Helpful envars:
+```
+export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH=$PATH:~/Tools
+export DATABASE_URL=postgres://$(whoami)
+eval "$(rbenv init -)"
+
+#Secrets
+export VIRUSTOTAL_API_KEY=xxxxxxxxxxxxxxxx
+export MUNINN_DATABASE_PASSWORD_PROD=xxxxx
+export MUNINN_DATABASE_PASSWORD_DEV=xxxxxx
+```
+
 **1. Create a new rails app:**
 `rails new appname`
 
