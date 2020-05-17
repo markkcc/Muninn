@@ -2,6 +2,10 @@ class ScansController < ApplicationController
   def new
   end
 
+  def index
+    redirect_to root_path
+  end
+
   def create
     scan = params[:scan]
     #@scan.save
