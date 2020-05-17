@@ -1,15 +1,23 @@
-<h1>New Scan</h1>
+<h1>Muninn</h1>
+
+<a href="https://github.com/markkcc/Muninn">Rails app</a> for OSINT.
 
 
 <%= form_with scope: :scan, url:scans_path, local: true do |form| %>
 
 
   <p>
-    <%= form.label :URL %><br>
+    <%= form.label "Target URL: " %><br>
     <%= form.text_field :URL %>
   </p>
 
+  <p> Options: <br><br>
+  <%= form.label "Screenshot: " %><%= form.check_box :screenshot_enabled, checked: true %> <br>
+  <%= form.label "Virus Total: " %><%= form.check_box :virustotal_enabled, checked: true %> <br>
+  <%= form.label "WHOIS: " %><%= form.check_box :whois_enabled, checked: true %> <br>
+  </p>
+
   <p>
-    <%= form.submit %>
+    <%= form.submit "Scan" %>
   </p>
 <% end %>
