@@ -7,19 +7,24 @@ class ScansController < ApplicationController
   end
 
   def create
-    scan = params[:scan]
+    scan = params.fetch(:scan, "")
     #@scan.save
     #redirect_to @scan
     
     @lookup_target = validate_url(scan["URL"])
 
-    @whoisdata = get_whoisdata(@lookup_target) unless params[:scan]["whois_enabled"] != "1"
-    @virustotaldata = get_virustotaldata(@lookup_target) unless params[:scan]["virustotal_enabled"] != "1"
+    if @lookup_target == ""
+      @virustotaldata = "404"
+      @whoisdata = "404"
+      @screenshot = ""
+    end
+    @whoisdata = get_whoisdata(@lookup_target) unless params[:scan]["whois_enabled"] != "1" or @lookup_target == ""
+    @virustotaldata = get_virustotaldata(@lookup_target) unless params[:scan]["virustotal_enabled"] != "1" or @lookup_target == ""
     if @whoisdata == "404" and @virustotaldata == "404"
       # If both failed, not worth trying.
       @screenshot = ""
     else
-      @screenshot = get_screenshot(@lookup_target) unless scan["screenshot_enabled"] != "1"
+      @screenshot = get_screenshot(@lookup_target) unless scan["screenshot_enabled"] != "1" or @lookup_target == ""
     end
   end
 
@@ -29,7 +34,8 @@ class ScansController < ApplicationController
     end
     #Muninn is uninterested in mundane requests.
     url = "https://" + url unless url.start_with?("http://") or url.start_with?("https://")
-    return URI.escape(url).to_s
+    return URI.escape(url).to_s unless url == "https://" #default value, return empty
+    return ""
   end
 
   def get_whoisdata(lookup_target)
