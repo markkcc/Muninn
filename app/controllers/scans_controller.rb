@@ -9,10 +9,14 @@ class ScansController < ApplicationController
     
     @lookup_target = validate_url(scan["URL"])
 
-    @whoisdata = get_whoisdata(@lookup_target) unless params[:scan]["whois_enabled"] == "0"
-    @virustotaldata = get_virustotaldata(@lookup_target) unless params[:scan]["virustotal_enabled"] == "0"
-    @screenshot = get_screenshot(@lookup_target) unless scan["screenshot_enabled"] == "0"
-
+    @whoisdata = get_whoisdata(@lookup_target) unless params[:scan]["whois_enabled"] != "1"
+    @virustotaldata = get_virustotaldata(@lookup_target) unless params[:scan]["virustotal_enabled"] != "1"
+    if @whoisdata == "404" and @virustotaldata == "404"
+      # If both failed, not worth trying.
+      @screenshot = ""
+    else
+      @screenshot = get_screenshot(@lookup_target) unless scan["screenshot_enabled"] != "1"
+    end
   end
 
   def validate_url(url)
@@ -25,7 +29,11 @@ class ScansController < ApplicationController
   end
 
   def get_whoisdata(lookup_target)
-    whois_results = Whois.whois(PublicSuffix.domain(URI(lookup_target).host, ignore_private: true)).to_s
+    begin
+      whois_results = Whois.whois(PublicSuffix.domain(URI(lookup_target).host, ignore_private: true)).to_s
+    rescue Whois::ServerNotFound => snf
+      whois_results = "404"
+    end
     return whois_results
   end
 
@@ -33,13 +41,17 @@ class ScansController < ApplicationController
     begin
       vtdata = VirusTotal::API.new.url.get(url)
     rescue VirusTotal::NotFoundError => nfe
-      vtdata = VirusTotal::API.new.url.get(URI(url).host)
+      begin
+        vtdata = VirusTotal::API.new.url.get(URI(url).host)
+      rescue VirusTotal::NotFoundError => nfe_fatal
+        vtdata = "404"
+      end
     end
     return vtdata
   end
 
   def get_screenshot(lookup_target)
-    global_timeout = 5 #seconds, max time to load
+    global_timeout = 12 #seconds, max time to load
     screenshot_base64 = ""
     if params[:scan]["screenshot_enabled"] == "1"
       begin

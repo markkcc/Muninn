@@ -7,11 +7,15 @@ Rendered at: <%= Time.now.utc %><br>
 <% end %>
 
 
-<% if params[:scan]["virustotal_enabled"] == "1" %>
+<% if params[:scan]["virustotal_enabled"] == "1" and @virustotaldata != "404" %>
   <%= render partial: 'virustotal' %>
+<% else %>
+  <p><b>VirusTotal Query Failed:</b> Server not found.</p>
 <% end %>
 
 
-<% if params[:scan]["whois_enabled"] == "1" %>
+<% if params[:scan]["whois_enabled"] == "1" and @whoisdata != "404" %>
   <%= render partial: 'whois' %>
+<% else %>
+  <p><b>WHOIS Failed:</b> Server not found.</p>
 <% end %>
