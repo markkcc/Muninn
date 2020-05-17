@@ -25,7 +25,7 @@ class ScansController < ApplicationController
   end
 
   def get_whoisdata(lookup_target)
-    whois_results = Whois.whois(PublicSuffix.domain(URI(lookup_target).host)).to_s
+    whois_results = Whois.whois(PublicSuffix.domain(URI(lookup_target).host, ignore_private: true)).to_s
     return whois_results
   end
 
