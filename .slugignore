@@ -1,0 +1,10 @@
+# Files and folders listed in here will be ignored
+# when deploying the application on Heroku.
+
+# More info: 
+# https://devcenter.heroku.com/articles/slug-compiler
+
+# Exclude local test scripts
+/Scripts
+
+
