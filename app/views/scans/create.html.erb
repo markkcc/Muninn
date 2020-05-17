@@ -2,8 +2,10 @@
 
 Rendered at: <%= Time.now.utc %><br>
 
-<% if params[:scan]["screenshot_enabled"] == "1" %>
+<% if params[:scan]["screenshot_enabled"] == "1" and @screenshot != "" %>
   <%= render partial: 'screenshot' %>
+<% else %>
+  <p><b>Screenshot Failed:</b> No data received.</p>
 <% end %>
 
 
