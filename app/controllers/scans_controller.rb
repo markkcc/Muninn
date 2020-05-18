@@ -66,24 +66,24 @@ class ScansController < ApplicationController
     if params[:scan]["screenshot_enabled"] == "1"
       begin
         capabilities = Selenium::WebDriver::Remote::Capabilities.firefox(accept_insecure_certs: true)
-        options = Selenium::WebDriver::Firefox::Options.new(args: ['--headless'])
+        options = Selenium::WebDriver::Firefox::Options.new(args: ['-headless', '-safe-mode'])
         driver = Selenium::WebDriver.for :firefox, options: options, desired_capabilities: capabilities
         driver.manage.timeouts.implicit_wait = global_timeout
         driver.manage.timeouts.script_timeout = global_timeout
         driver.manage.timeouts.page_load = global_timeout
         driver.navigate.to @lookup_target
-        sleep(2.5)
+        sleep(2.5) #wait for dynamic content to load
         screenshot_base64 = driver.screenshot_as(:base64)
         driver.quit
       rescue Selenium::WebDriver::Error::TimeoutError => toe
         screenshot_base64 = ""
-        driver.quit
+        driver.quit unless driver.nil?
       rescue Selenium::WebDriver::Error::UnknownError => ue
         screenshot_base64 = ""
-        driver.quit
+        driver.quit unless driver.nil?
       rescue Selenium::WebDriver::Error::WebDriverError => wde
         screenshot_base64 = ""
-        driver.quit
+        driver.quit unless driver.nil?
       end
     end
     return screenshot_base64
