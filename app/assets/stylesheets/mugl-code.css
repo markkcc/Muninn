@@ -1,0 +1,27 @@
+pre {
+  margin: 2em 0;
+}
+
+.hljs {
+  display: block; padding: 1em;
+  background: #222222; color: #ff6000;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #000 #000 #000 #000;
+}
+
+.hljs-keyword,
+.hljs-title,
+.hljs-name {
+  color: #558796;
+}
+
+.hljs-string,
+.hljs-literal {
+  color: #4fa740;
+}
+
+.hljs-comment {
+    color: #766;
+}
+

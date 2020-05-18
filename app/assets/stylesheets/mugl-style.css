@@ -1,0 +1,239 @@
+@import url(PTSans.css);
+
+body {
+  color: #F0F0F0;
+  background: #111111;
+  margin: 0 auto;
+  width: 52em;
+  font-family: PT Sans, DejaVu Sans, Arial, sans;
+}
+
+a {
+  color: white;
+}
+
+h2 {
+  margin: 2em 0 1em 0;
+  font-weight: bold;
+  font-size: 150%;
+}
+
+ul li {
+  list-style-type: square;
+}
+
+ul.ui {
+  padding: 0 0 0 1em;
+}
+
+ul.ui li {
+  margin: 0.25em 0; padding: 0;
+}
+
+pre code {
+  font: normal 10pt Consolas, Monaco, monospace;
+}
+
+#header {
+  padding-top: 1em;
+  height: 1em;
+  margin-bottom: 6em;
+}
+
+#header h1 {
+  font-weight: bold;
+  font-size: 250%;
+  margin: 0;
+  text-align: justify;
+  width:100%;
+  margin-bottom: -1.5em;
+}
+
+#header h4 {
+  text-align: justify;
+  width:100%;
+  /*margin-bottom: -1em;*/
+}
+
+#header span {
+    /* filler to make previous header justify. source:
+    http://codepen.io/aakilfernandes/pen/IEAhF/
+    */
+    width:100%;
+    display:inline-block;
+}
+
+#header p {
+  /*font-style: italic;*/
+}
+
+#snippet {
+  float: left; width: 30em;
+  padding: 1em;
+  background: #500;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #400 #700 #700 #400;
+}
+
+#snippet pre {
+  margin: 0;
+}
+
+#snippet pre code {
+  display: block;
+  height: 19em; padding: 1em;
+  overflow-y: auto; overflow-x: hidden;
+}
+
+#control p {
+  display: inline-block;
+  width: 11em; margin: 0.5em 0 0 0;
+}
+
+#label {
+  margin: 0.5em 0;
+  font-size: 80%;
+  color: #AAA;
+}
+
+#description {
+  margin-left: 34em;
+}
+
+#features {
+  margin-bottom: 3em;
+}
+
+#download a {
+  display: block; width: 12em;
+  margin: 0 auto;  padding: 1em;
+  text-align: center;
+  background: linear-gradient(to bottom, #444, #333);
+  border-color: #555 #222 #222 #555;
+  border-style: solid;
+  border-width: 0.1em;
+  border-radius: 0.2em;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 120%;
+  text-shadow: black 1px 1px 2px;
+}
+
+#usage {
+  text-align: center;
+}
+
+#contribute {
+  position: absolute;
+  top: 0; right: 0;
+  width: 16em; height: 10em;
+  overflow: hidden;
+}
+
+#contribute p {
+  background: #444;
+  margin: 0; padding: 3px;  width: 16em;
+  transform: translate(50%, -50%) rotate(45deg) translate(0, 5em);
+  -webkit-transform: translate(50%, -50%) rotate(45deg) translate(0, 5em);
+}
+
+#contribute a {
+  display: block;
+  padding: 0.2em 0;
+  text-align: center;
+  border: dashed white 1px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#news {
+  clear: both;
+  padding-top: 2em;
+}
+
+#social {
+  float: right;
+  margin-top: 3em;
+}
+
+#social img {
+  padding-right: 0.5em;
+}
+
+#news>ol {
+  margin: 0; padding: 0;
+}
+
+#news>ol>li {
+  list-style: none;
+  margin: 2em 0; padding: 0;
+}
+
+#news li .time {
+  float: left;
+}
+
+#news li .text {
+  margin-left: 8em;
+}
+
+#news .text ul,
+#news .text ol {
+  padding-left: 1em;
+}
+
+#news .text li {
+  padding: 0;
+}
+
+#download-form ul {
+  overflow: auto;
+  margin: 1em 0; padding: 0;
+}
+
+#download-form li {
+  margin: 0.2em 0; padding: 0;
+  list-style: none;
+  float: left; width: 24.5%;
+}
+
+#updates .version {
+  float: left; width: 8em;
+  margin-top: 0;
+}
+
+#updates .time {
+  margin-left: 8em;
+}
+
+#updates .time p {
+  color: #AAA;
+  font-size: smaller;
+  margin: 0.1em 0;
+}
+
+#updates .status {
+  margin-left: 8em;
+}
+
+#updates .active {
+  border-bottom: dotted 1px;
+  cursor: pointer;
+}
+
+#updates .error {
+  padding: 1em;
+  background: #500;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #400 #700 #700 #400;
+  overflow-x: auto;
+  transition: height 0.25s, padding 0.25s;
+}
+
+#updates .error.hidden {
+  height: 0; padding-top: 0; padding-bottom: 0;
+  border: none;
+}
+

@@ -43,6 +43,8 @@ class ScansController < ApplicationController
       whois_results = Whois.whois(PublicSuffix.domain(URI(lookup_target).host, ignore_private: true)).to_s
     rescue Whois::ServerNotFound => snf
       whois_results = "404"
+    rescue URI::InvalidURIError => iue
+      whois_results = "404"
     end
     return whois_results
   end
@@ -54,6 +56,8 @@ class ScansController < ApplicationController
       begin
         vtdata = VirusTotal::API.new.url.get(URI(url).host)
       rescue VirusTotal::NotFoundError => nfe_fatal
+        vtdata = "404"
+      rescue URI::InvalidURIError => iue
         vtdata = "404"
       end
     end
