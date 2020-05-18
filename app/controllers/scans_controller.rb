@@ -66,7 +66,8 @@ class ScansController < ApplicationController
     if params[:scan]["screenshot_enabled"] == "1"
       begin
         capabilities = Selenium::WebDriver::Remote::Capabilities.firefox(accept_insecure_certs: true)
-        driver = Selenium::WebDriver.for :firefox, desired_capabilities: capabilities
+        options = Selenium::WebDriver::Firefox::Options.new(args: ['--headless'])
+        driver = Selenium::WebDriver.for :firefox, options: options, desired_capabilities: capabilities
         driver.manage.timeouts.implicit_wait = global_timeout
         driver.manage.timeouts.script_timeout = global_timeout
         driver.manage.timeouts.page_load = global_timeout
