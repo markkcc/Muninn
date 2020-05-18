@@ -30,7 +30,7 @@ class ScansController < ApplicationController
 
   def validate_url(url)
     if url["127.0.0.1"] or url["//localhost"] #reject
-      raise "localhost" #Muninn introspects...
+      return "" #Muninn introspects...
     end
     #Muninn is uninterested in mundane requests.
     url = "https://" + url unless url.start_with?("http://") or url.start_with?("https://")
@@ -66,7 +66,7 @@ class ScansController < ApplicationController
     if params[:scan]["screenshot_enabled"] == "1"
       begin
         options = Selenium::WebDriver::Chrome::Options.new
-        options.add_argument "--window-size=800x800"
+        options.add_argument "--window-size=1280x1024"
         options.add_argument "--headless"
         options.add_argument "--disable-gpu"
         options.add_argument "--disable-speech-api"
