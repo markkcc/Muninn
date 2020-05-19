@@ -47,16 +47,21 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+# Disabled, as I don't intend on running this on Windows.
+# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Used by Muninn
 gem "selenium-webdriver"
 gem "whois"
 gem "virustotalx"
 gem "public_suffix"
+
+# Heroku-specific
+gem 'sqreen', '>= 1.16'
+
+
