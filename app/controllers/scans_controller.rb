@@ -68,7 +68,7 @@ class ScansController < ApplicationController
   end
 
   def get_screenshot(lookup_target)
-    global_timeout = 12 #seconds, max time to load
+    global_timeout = 15 #seconds, max time to load
     screenshot_base64 = ""
     if params[:scan]["screenshot_enabled"] == "1"
       begin
