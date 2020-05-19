@@ -29,6 +29,9 @@ class ScansController < ApplicationController
   end
 
   def validate_url(url)
+    if url.length >= 250
+      return "" #Muninn is unamused by absurd requests.
+    end
     if url["127.0.0.1"] or url["//localhost"] #reject
       return "" #Muninn introspects...
     end
