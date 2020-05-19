@@ -194,3 +194,12 @@ tar -C vendor/binary -xvf binary.tgz
 - Heroku: [Hacking Buildpacks](https://blog.heroku.com/hacking-buildpacks) (2012)
 - Github: [Null Buildpack](https://github.com/ryandotsmith/null-buildpack) (Fork to build your own)
 - Blog: [Run Anything on Heroku with Custom Buildpacks](https://www.petekeen.net/introduction-to-heroku-buildpacks)
+
+### Installing the [Sqreen](https://elements.heroku.com/addons/sqreen) addon on Heroku for Rails
+
+1. Add it to your app from your Heroku dashboard, then open the Sqreen addon
+2. `echo "gem 'sqreen', '>= 1.16'" >> Gemfile`
+3. `bundle install`
+4. Set Sqreen's token (provided by their addon dashboard), as an envar in Heroku
+`heroku config:set SQREEN_TOKEN=xxxxxxxxxxxxxxxxxxxxxxx -a appnamehere`
+
