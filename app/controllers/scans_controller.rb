@@ -102,12 +102,12 @@ class ScansController < ApplicationController
       rescue Selenium::WebDriver::Error::TimeoutError => toe
         screenshot_base64 = ""
         driver.quit unless driver.nil?
-      rescue Selenium::WebDriver::Error::UnknownError => ue
-        screenshot_base64 = ""
-        driver.quit unless driver.nil?
-      rescue Selenium::WebDriver::Error::WebDriverError => wde
-        screenshot_base64 = ""
-        driver.quit unless driver.nil?
+      #rescue Selenium::WebDriver::Error::UnknownError => ue
+      #  screenshot_base64 = ""
+      #  driver.quit unless driver.nil?
+      #rescue Selenium::WebDriver::Error::WebDriverError => wde
+      #  screenshot_base64 = ""
+      #  driver.quit unless driver.nil?
       end
     end
     return screenshot_base64
