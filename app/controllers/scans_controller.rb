@@ -78,6 +78,7 @@ class ScansController < ApplicationController
         chrome_bin_default = "/usr/bin/google-chrome"
         # Heroku buildpack: /app/.apt/usr/bin/google-chrome
         # or:               /app/.apt/opt/google/chrome/chrome
+        logger.info "Chrome binary path (if any): " + chrome_bin.to_s
 
         options = Selenium::WebDriver::Chrome::Options.new
         options.binary = chrome_bin ? chrome_bin : chrome_bin_default
