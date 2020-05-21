@@ -74,7 +74,13 @@ class ScansController < ApplicationController
     screenshot_base64 = ""
     if params[:scan]["screenshot_enabled"] == "1"
       begin
+        chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+        chrome_bin_default = "/usr/bin/google-chrome"
+        # Heroku buildpack: /app/.apt/usr/bin/google-chrome
+
+
         options = Selenium::WebDriver::Chrome::Options.new
+        options.binary = chrome_bin ? chrome_bin : chrome_bin_default
         options.add_argument "--window-size=1280x1024"
         options.add_argument "--headless"
         options.add_argument "--disable-gpu"
@@ -106,6 +112,9 @@ class ScansController < ApplicationController
       #  screenshot_base64 = ""
       #  driver.quit unless driver.nil?
       #rescue Selenium::WebDriver::Error::WebDriverError => wde
+      #  screenshot_base64 = ""
+      #  driver.quit unless driver.nil?
+      #rescue Webdrivers::BrowserNotFound => bnf
       #  screenshot_base64 = ""
       #  driver.quit unless driver.nil?
       end
