@@ -74,10 +74,10 @@ class ScansController < ApplicationController
     screenshot_base64 = ""
     if params[:scan]["screenshot_enabled"] == "1"
       begin
-        chrome_bin = ENV.fetch('GOOGLE_CHROME_SHIM', nil)
+        chrome_bin = ENV.fetch('GOOGLE_CHROME_BIN', nil)
         chrome_bin_default = "/usr/bin/google-chrome"
         # Heroku buildpack: /app/.apt/usr/bin/google-chrome
-
+        # or:               /app/.apt/opt/google/chrome/chrome
 
         options = Selenium::WebDriver::Chrome::Options.new
         options.binary = chrome_bin ? chrome_bin : chrome_bin_default
