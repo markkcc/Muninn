@@ -74,14 +74,10 @@ class ScansController < ApplicationController
     screenshot_base64 = ""
     if params[:scan]["screenshot_enabled"] == "1"
       begin
-        chrome_bin = ENV.fetch('GOOGLE_CHROME_BIN', nil)
-        chrome_bin_default = "/usr/bin/google-chrome"
-        # Heroku buildpack: /app/.apt/usr/bin/google-chrome
-        # or:               /app/.apt/opt/google/chrome/chrome
-        logger.info "Chrome binary path (if any): " + chrome_bin.to_s
-
         options = Selenium::WebDriver::Chrome::Options.new
-        options.binary = chrome_bin ? chrome_bin : chrome_bin_default
+        Selenium::WebDriver::Chrome.path = ENV['GOOGLE_CHROME_SHIM'] if ENV['GOOGLE_CHROME_SHIM'].present?
+        logger.info "Chrome binary path (if any): " + ENV.fetch('GOOGLE_CHROME_SHIM', "nil")
+
         options.add_argument "--window-size=1280x1024"
         options.add_argument "--headless"
         options.add_argument "--disable-gpu"
@@ -107,17 +103,21 @@ class ScansController < ApplicationController
         
         driver.quit
       rescue Selenium::WebDriver::Error::TimeoutError => toe
+        logger.fatal toe
         screenshot_base64 = ""
         driver.quit unless driver.nil?
-      #rescue Selenium::WebDriver::Error::UnknownError => ue
-      #  screenshot_base64 = ""
-      #  driver.quit unless driver.nil?
-      #rescue Selenium::WebDriver::Error::WebDriverError => wde
-      #  screenshot_base64 = ""
-      #  driver.quit unless driver.nil?
-      #rescue Webdrivers::BrowserNotFound => bnf
-      #  screenshot_base64 = ""
-      #  driver.quit unless driver.nil?
+      rescue Selenium::WebDriver::Error::UnknownError => ue
+        logger.fatal ue
+        screenshot_base64 = ""
+        driver.quit unless driver.nil?
+      rescue Selenium::WebDriver::Error::WebDriverError => wde
+        logger.fatal wde
+        screenshot_base64 = ""
+        driver.quit unless driver.nil?
+      rescue Webdrivers::BrowserNotFound => bnf
+        logger.fatal bnf
+        screenshot_base64 = ""
+        driver.quit unless driver.nil?
       end
     end
     return screenshot_base64
