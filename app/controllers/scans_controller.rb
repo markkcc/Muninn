@@ -26,6 +26,31 @@ class ScansController < ApplicationController
     else
       @screenshot = get_screenshot(@lookup_target) unless scan["screenshot_enabled"] != "1" or @lookup_target == ""
     end
+
+    if ENV['WEBHOOK_URL'] != nil and @lookup_target != ""
+      begin
+        uri = URI.parse(ENV['WEBHOOK_URL'])
+        request = Net::HTTP::Post.new(uri)
+        request.content_type = "application/json"
+        request.body = JSON.dump({
+          "text" => "Scanned: " + @lookup_target.gsub(/\.|:\/\//, "|")
+        })
+
+        req_options = {
+          use_ssl: uri.scheme == "https",
+        }
+
+        response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+          http.request(request)
+        end
+
+        logger.info "Webhook response code: " + response.code
+
+      rescue URI::InvalidURIError => iue
+        logger.fatal "Webhook error: " + iue
+      end
+    end
+
   end
 
   def validate_url(url)
