@@ -11,6 +11,9 @@ class ScansController < ApplicationController
     #@scan.save
     #redirect_to @scan
     
+    if scan == nil or scan.to_s == "" or scan["URL"].to_s == ""
+      redirect_to root_path
+    end
     @lookup_target = validate_url(scan["URL"])
 
     if @lookup_target == ""
@@ -61,6 +64,7 @@ class ScansController < ApplicationController
       return "" #Muninn introspects...
     end
     #Muninn is uninterested in mundane requests.
+    url = url.downcase
     url = "https://" + url unless url.start_with?("http://") or url.start_with?("https://")
     return URI.escape(url).to_s unless url == "https://" #default value, return empty
     return ""
