@@ -1,10 +1,10 @@
 
 
     <div data-v-8db23f90="">
-      <div data-v-8db23f90="" class="logo-wrapper"><%= image_tag("muninn-logo.png", "data-v-8db23f90" => "") %>
+      <div data-v-8db23f90="" class="logo-wrapper"><%= image_tag("muninn-logo.png", id: "logo", "data-v-8db23f90" => "") %>
       </div> 
     
-    <div data-v-8db23f90="" class="grid-container one">
+    <div id="searchBar" data-v-8db23f90="" class="grid-container one">
       <div data-v-8db23f90="" class="query-box-wrapper">
         <div data-v-8db23f90="" class="relative">
           <div class="query-box" style="height: 65px;">
@@ -13,7 +13,7 @@
                 <div class="input-wrapper">
                   <div id="textInput" contenteditable="true" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="[TARGET_URL]" data-gramm="false" class="query-input"></div></div><div class="button-wrapper focused"><button onclick="submitHiddenForm()" data-v-6c4e492a="" class="button" id="search-button" tabindex="0">&gt; Scan</button></div></div></div></div></div></div>
 
-  <div data-v-8db23f90="" class="grid-container anomalies-wrapper">
+  <div id="subButtons" data-v-8db23f90="" class="grid-container anomalies-wrapper">
    <div data-v-8db23f90="" class="col">
     <div data-v-8db23f90="" class="ticker-header">
       <span data-v-8db23f90="" class="anomalies-header">Config:</span>
@@ -42,7 +42,7 @@
   <div data-v-8db23f90="" class="link-wrapper"><a data-v-8db23f90="" href="#" class="">&gt; Documentation</a></div>
   </div>
 
-  <div data-v-8db23f90="" class="social-footer">Muninn v0.2.1590308646</div>
+  <div id="footer" data-v-8db23f90="" class="social-footer">Muninn v0.2.1590308646</div>
 
   </div></div></div>
 
@@ -64,6 +64,33 @@
       var url = document.getElementById("textInput").textContent;
       document.getElementById("scan_URL").value = url;
       document.getElementsByName('commit')[0].click();
+      startLoading();
+    }
+
+    async function startLoading() {
+      document.getElementById('searchBar').style.display = "none";
+      document.getElementById('subButtons').style.display = "none";
+      document.getElementById('logo').src="/loading-icon-slow.svg";
+      slowLoadFooter("[SCANNING]: ...........");
+      await new Promise(resolve => setTimeout(resolve, 2300));
+      randomLoaderFooter();
+    };
+
+    async function slowLoadFooter(inputstr) {
+          document.getElementById('footer').textContent = "";
+          charsArray = [...inputstr];
+          for (i=0; i < charsArray.length; i++) {
+              document.getElementById('footer').append(charsArray[i]);
+              await new Promise(resolve => setTimeout(resolve, 69));
+          }
+    };
+
+    async function randomLoaderFooter() {
+      var msToWait = Math.floor((Math.random() * 4242) + 4242);
+      for ( i=0; i < msToWait; i+=69) {
+        document.getElementById('footer').textContent = "[SCANNING]: " + i + " / " + msToWait;
+        await new Promise(resolve => setTimeout(resolve, 69));
+      }
     }
 
     function toggleScreenshot() {
@@ -98,9 +125,18 @@
 
       document.getElementById("scan_whois_enabled").click();
     }
+
+    function enableAllonLoad() {
+      document.getElementById("scan_screenshot_enabled").checked = true;
+      document.getElementById("scan_virustotal_enabled").checked = true;
+      document.getElementById("scan_whois_enabled").checked = true;
+    }
   </script>
 
   <script>
+    //enable all config options by default when the page loads
+    enableAllonLoad();
+
     //listen for enter key
     var urlinputbox = document.getElementById("textInput");
     urlinputbox.addEventListener("keydown", function (e) {
