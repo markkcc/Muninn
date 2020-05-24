@@ -1,24 +1,116 @@
-<h1>Muninn</h1>
 
-<a href="https://github.com/markkcc/Muninn">Rails app</a> for OSINT.
+
+    <div data-v-8db23f90="">
+      <div data-v-8db23f90="" class="logo-wrapper"><%= image_tag("muninn-logo", "data-v-8db23f90" => "") %>
+      </div> 
+    
+    <div data-v-8db23f90="" class="grid-container one">
+      <div data-v-8db23f90="" class="query-box-wrapper">
+        <div data-v-8db23f90="" class="relative">
+          <div class="query-box" style="height: 65px;">
+            <div class="queryInputSearch-wrapper">
+
+                <div class="input-wrapper">
+                  <div id="textInput" contenteditable="true" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="[TARGET_URL]" data-gramm="false" class="query-input"></div></div><div class="button-wrapper focused"><button onclick="submitHiddenForm()" data-v-6c4e492a="" class="button" id="search-button" tabindex="0">&gt; Scan</button></div></div></div></div></div></div>
+
+  <div data-v-8db23f90="" class="grid-container anomalies-wrapper">
+   <div data-v-8db23f90="" class="col">
+    <div data-v-8db23f90="" class="ticker-header">
+      <span data-v-8db23f90="" class="anomalies-header">Config:</span>
+      <div data-v-8db23f90="" class="anomalies-ticker">
+        <p class="anomaly">
+        Screenshot:<span class="baffled" onclick="toggleScreenshot()"><a data-v-8db23f90="" class="router-link">[ENABLED]</a></span>
+          | VirusTotal:<span class="baffled" onclick="toggleVT()"><a data-v-8db23f90="" class="router-link">[ENABLED]</a></span>
+          | WHOIS:<span class="baffled" onclick="toggleWHOIS()"><a data-v-8db23f90="" class="router-link">[ENABLED]</a></span>
+          <br>
+          <br>
+        </p>
+      </div>
+    </div>
+  <div data-v-8db23f90="" class="ticker-header">
+      <span data-v-8db23f90="" class="anomalies-header">Status:</span>
+      <div data-v-8db23f90="" class="anomalies-ticker">
+        <p class="anomaly">
+          <span class="chip">
+            <span><span class="baffled">READY</span> | STANDBY</span>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div data-v-8db23f90="" class="link-wrapper"><a data-v-8db23f90="" href="#" class="">&gt; Documentation</a></div>
+  </div>
+
+  <div data-v-8db23f90="" class="social-footer">Muninn v0.2.1590298785</div>
+
+  </div></div></div>
 
 
 <%= form_with scope: :scan, url:scans_path, local: true do |form| %>
 
+  <%= form.label "Target URL: ", :style => 'visibility: hidden' %>
+  <%= form.text_field :URL, :style => 'visibility: hidden' %>
 
-  <p>
-    <%= form.label "Target URL: " %><br>
-    <%= form.text_field :URL %>
-  </p>
+  <%= form.label "Screenshot: ", :style => 'visibility: hidden' %><%= form.check_box :screenshot_enabled, checked: true, :style => 'visibility: hidden' %> <br>
+  <%= form.label "Virus Total: ", :style => 'visibility: hidden' %><%= form.check_box :virustotal_enabled, checked: true, :style => 'visibility: hidden' %> <br>
+  <%= form.label "WHOIS: ", :style => 'visibility: hidden' %><%= form.check_box :whois_enabled, checked: true, :style => 'visibility: hidden' %> <br>
 
-  <p> Options: <br><br>
-  <%= form.label "Screenshot: " %><%= form.check_box :screenshot_enabled, checked: true %> <br>
-  <%= form.label "Virus Total: " %><%= form.check_box :virustotal_enabled, checked: true %> <br>
-  <%= form.label "WHOIS: " %><%= form.check_box :whois_enabled, checked: true %> <br>
-  </p>
+<%= form.submit "Scan", :style => 'visibility: hidden' %>
 
-  <p>
-    <%= form.submit "Scan" %>
-  </p>
+
+  <script>
+    function submitHiddenForm() {
+      var url = document.getElementById("textInput").textContent;
+      document.getElementById("scan_URL").value = url;
+      document.getElementsByName('commit')[0].click();
+    }
+
+    function toggleScreenshot() {
+      var screenshotButton = document.getElementsByClassName("baffled")[0];
+
+      if(screenshotButton.textContent == "[ENABLED]")
+        screenshotButton.textContent = "[DISABLED]";
+      else
+        screenshotButton.textContent = "[ENABLED]";
+
+      document.getElementById("scan_screenshot_enabled").click();
+    }
+
+    function toggleVT() {
+      var vtButton = document.getElementsByClassName("baffled")[1];
+
+      if(vtButton.textContent == "[ENABLED]")
+        vtButton.textContent = "[DISABLED]";
+      else
+        vtButton.textContent = "[ENABLED]";
+
+      document.getElementById("scan_virustotal_enabled").click();
+    }
+
+    function toggleWHOIS() {
+      var whoisButton = document.getElementsByClassName("baffled")[2];
+
+      if(whoisButton.textContent == "[ENABLED]")
+        whoisButton.textContent = "[DISABLED]";
+      else
+        whoisButton.textContent = "[ENABLED]";
+
+      document.getElementById("scan_whois_enabled").click();
+    }
+  </script>
+
+  <script>
+    //listen for enter key
+    var urlinputbox = document.getElementById("textInput");
+    urlinputbox.addEventListener("keydown", function (e) {
+    if (e.keyCode === 13) {  //checks whether the pressed key is "Enter"
+        document.getElementById("search-button").click();
+      }
+    });
+  </script>
+
 
 <% end %>
+
+

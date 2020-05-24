@@ -79,6 +79,8 @@ class ScansController < ApplicationController
       whois_results = "404"
     rescue Whois::ConnectionError => ce
       whois_results = "404"
+    rescue Whois::WebInterfaceError => wie
+      whois_results = "404"
     end
     return whois_results
   end
