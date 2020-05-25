@@ -64,8 +64,7 @@ class ScansController < ApplicationController
       return "" #Muninn introspects...
     end
     #Muninn is uninterested in mundane requests.
-    url = url.downcase
-    url = "https://" + url unless url.start_with?("http://") or url.start_with?("https://")
+    url = "https://" + url unless url.downcase.start_with?("http://") or url.downcase.start_with?("https://")
     return URI.escape(url).to_s unless url == "https://" #default value, return empty
     return ""
   end
