@@ -128,7 +128,7 @@ class ScansController < ApplicationController
         driver.manage.timeouts.page_load = global_timeout
         
         driver.navigate.to @lookup_target
-        sleep(2.5) #wait for dynamic content to load
+        sleep(4.2) #wait for dynamic content to load
         screenshot_base64 = driver.screenshot_as(:base64)
         
         driver.quit
