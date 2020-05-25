@@ -120,6 +120,7 @@ class ScansController < ApplicationController
         options.add_argument "--no-default-browser-check"
         options.add_argument "--no-pings" #"Don't send hyperlink auditing pings"
         options.add_argument "--fast"
+        options.add_argument "--disable-dev-shm-usage" #Try avoiding memory issues by using disk (/tmp)
 
         driver = Selenium::WebDriver.for :chrome, options: options
         
@@ -128,7 +129,7 @@ class ScansController < ApplicationController
         driver.manage.timeouts.page_load = global_timeout
         
         driver.navigate.to @lookup_target
-        sleep(4.2) #wait for dynamic content to load
+        sleep(4) #wait for dynamic content to load
         screenshot_base64 = driver.screenshot_as(:base64)
         
         driver.quit
