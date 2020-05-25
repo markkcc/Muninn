@@ -1,7 +1,8 @@
 
 
     <div data-v-8db23f90="">
-      <div data-v-8db23f90="" class="logo-wrapper"><%= image_tag("muninn-logo.png", id: "logo", "data-v-8db23f90" => "") %>
+      <div data-v-8db23f90="" class="logo-wrapper">
+        <?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="180px" height="180px" viewBox="0 0 128 128" xml:space="preserve"><circle cx="64.13" cy="64.13" r="27.63" fill="#424242"/><path d="M64.13 18.5A45.63 45.63 0 1 1 18.5 64.13 45.63 45.63 0 0 1 64.13 18.5zm0 7.85a37.78 37.78 0 1 1-37.78 37.78 37.78 37.78 0 0 1 37.78-37.78z" fill-rule="evenodd" fill="#424242"/><g><path d="M95.25 17.4a56.26 56.26 0 0 0-76.8 13.23L12.1 26.2a64 64 0 0 1 87.6-15.17z" fill="#424242"/><path d="M95.25 17.4a56.26 56.26 0 0 0-76.8 13.23L12.1 26.2a64 64 0 0 1 87.6-15.17z" fill="#424242" transform="rotate(120 64 64)"/><path d="M95.25 17.4a56.26 56.26 0 0 0-76.8 13.23L12.1 26.2a64 64 0 0 1 87.6-15.17z" fill="#424242" transform="rotate(240 64 64)"/><animateTransform id="animlogo" begin="indefinite" attributeName="transform" type="rotate" from="0 64 64" to="120 64 64" dur="1920ms" repeatCount="indefinite"></animateTransform></g></svg>
       </div> 
     
     <div id="searchBar" data-v-8db23f90="" class="grid-container one">
@@ -68,9 +69,9 @@
     }
 
     async function startLoading() {
+      document.getElementById('animlogo').beginElement();
       document.getElementById('searchBar').style.display = "none";
       document.getElementById('subButtons').style.display = "none";
-      document.getElementById('logo').src="/loading-icon-slow.svg";
       slowLoadFooter("[SCANNING]: ...........");
       await new Promise(resolve => setTimeout(resolve, 2300));
       randomLoaderFooter();
@@ -86,11 +87,17 @@
     };
 
     async function randomLoaderFooter() {
-      var msToWait = Math.floor((Math.random() * 4242) + 4242);
+      var msToWait = Math.floor((Math.random() * 4242) + 6969);
       for ( i=0; i < msToWait; i+=69) {
         document.getElementById('footer').textContent = "[SCANNING]: " + i + " / " + msToWait;
         await new Promise(resolve => setTimeout(resolve, 69));
       }
+      document.getElementById('footer').textContent = "[SCANNING]: " + msToWait + " / " + msToWait;
+      document.getElementById('animlogo').endElement();
+      await new Promise(resolve => setTimeout(resolve, 1600));
+      slowLoadFooter("[DISENGAGING]");
+      await new Promise(resolve => setTimeout(resolve, 3200));
+      slowLoadFooter("[STANDBY]");
     }
 
     function toggleScreenshot() {
