@@ -1,8 +1,8 @@
 <p> <h2>VirusTotal:</h2> <br><br>
 <b>Link:</b> <a href="<%= "https://www.virustotal.com/gui/url/" + @virustotaldata["data"]["id"].to_s + "/detection" %>"><%= "https://www.virustotal.com/gui/url/" + @virustotaldata["data"]["id"].to_s + "/detection" %></a> <br><br>
 
-<b>Analysis:
-<pre><code class="bash hljs">
+<b>-=-=-= Analysis =-=-=-
+<pre><code data-v-8db23f90="">
 Last anaylsis date: <%= @virustotaldata["data"]["attributes"]["last_analysis_date"] %>
 Last analysis stats: 
 <% if not @virustotaldata["data"]["attributes"]["last_analysis_stats"].inspect == "nil" %>
@@ -12,7 +12,7 @@ Last analysis stats:
 </code></pre>
 <% end %>
 
-<b>Last HTTP Response:</b>
+<b>-=-=-= Last HTTP Response =-=-=-</b>
 <pre><code class="bash hljs">
 Final URL: <%= @virustotaldata["data"]["attributes"]["last_final_url"] %> 
 Status Code: <%= @virustotaldata["data"]["attributes"]["last_https_response_code"] %> 
@@ -20,7 +20,7 @@ Content Length: <%= @virustotaldata["data"]["attributes"]["last_http_response_co
 Body SHA-256: <%= @virustotaldata["data"]["attributes"]["last_http_response_content_sha256"] %> 
 </code></pre>
 <br>
-Cookies: <br>
+HTTP Cookies: <br>
 <pre><code class="bash hljs">
 <% if not  @virustotaldata["data"]["attributes"]["last_http_response_cookies"].inspect == "nil" %>
   <% @virustotaldata["data"]["attributes"]["last_http_response_cookies"].each do |k,v| %>
@@ -29,7 +29,7 @@ Cookies: <br>
 <% end %>
 </code></pre>
 <br>
-Headers:
+HTTP Headers:
 <pre><code class="bash hljs">
 <% if not @virustotaldata["data"]["attributes"]["last_http_response_headers"].inspect == "nil" %>
   <% @virustotaldata["data"]["attributes"]["last_http_response_headers"].each do |k,v| %>
@@ -38,18 +38,4 @@ Headers:
 <% end %>
 </code></pre>
 <br>
-
-
-<b>Community Votes:</b>
-<pre><code class="bash hljs">
-First submission date: <%= @virustotaldata["data"]["attributes"]["first_submission_date"] %>
-Last submission date: <%= @virustotaldata["data"]["attributes"]["last_submission_date"] %>
-Votes:
-<% if not @virustotaldata["data"]["attributes"]["total_votes"].inspect == "nil" %>
-  <% @virustotaldata["data"]["attributes"]["total_votes"].each do |k,v| %>
-    <%= k %>: <%= v %>
-  <% end %>
-<% end %>
-</code></pre>
-</p>
 

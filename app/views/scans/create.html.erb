@@ -1,12 +1,13 @@
-<h1>Scan for <%= @lookup_target %></h1>
-
-Rendered at: <%= Time.now.utc %><br>
+<p><h2>Scan for <%= @lookup_target %></h2>
+<br>
+Rendered at: <%= Time.now.utc %></p>
+<br>
 
 <% if params[:scan]["screenshot_enabled"] == "1" %>
   <% if @screenshot != "" %>
     <%= render partial: 'screenshot' %>
   <% else %>
-    <p><b>Screenshot Failed:</b> No data received.</p>
+    <p><h3 style="color: red">Screenshot Failed: No data received.</h3></p>
   <% end %>
 <% end %>
 
@@ -14,7 +15,7 @@ Rendered at: <%= Time.now.utc %><br>
   <% if @virustotaldata != "404" %>
     <%= render partial: 'virustotal' %>
   <% else %>
-    <p><b>VirusTotal Query Failed:</b> Server not found.</p>
+    <p><h3 style="color: red">VirusTotal Query Failed: Server not found.</h3></p>
   <% end %>
 <% end %>
 
@@ -22,6 +23,6 @@ Rendered at: <%= Time.now.utc %><br>
   <% if @whoisdata != "404" %>
     <%= render partial: 'whois' %>
   <% else %>
-    <p><b>WHOIS Failed:</b> Server not found.</p>
+    <p><h3 style="color: red">WHOIS Failed: Server not found.</h3></p>
   <% end %>
 <% end %>

@@ -3,8 +3,8 @@
     <div data-v-8db23f90="">
       <div data-v-8db23f90="" class="logo-wrapper">
         <?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="180px" height="180px" viewBox="0 0 128 128" xml:space="preserve"><circle cx="64.13" cy="64.13" r="27.63" fill="#424242"/><path d="M64.13 18.5A45.63 45.63 0 1 1 18.5 64.13 45.63 45.63 0 0 1 64.13 18.5zm0 7.85a37.78 37.78 0 1 1-37.78 37.78 37.78 37.78 0 0 1 37.78-37.78z" fill-rule="evenodd" fill="#424242"/><g><path d="M95.25 17.4a56.26 56.26 0 0 0-76.8 13.23L12.1 26.2a64 64 0 0 1 87.6-15.17z" fill="#424242"/><path d="M95.25 17.4a56.26 56.26 0 0 0-76.8 13.23L12.1 26.2a64 64 0 0 1 87.6-15.17z" fill="#424242" transform="rotate(120 64 64)"/><path d="M95.25 17.4a56.26 56.26 0 0 0-76.8 13.23L12.1 26.2a64 64 0 0 1 87.6-15.17z" fill="#424242" transform="rotate(240 64 64)"/><animateTransform id="animlogo" begin="indefinite" attributeName="transform" type="rotate" from="0 64 64" to="120 64 64" dur="1920ms" repeatCount="indefinite"></animateTransform></g></svg>
-      </div> 
-    
+      </div>
+
     <div id="searchBar" style="transition: opacity 0.4s;" data-v-8db23f90="" class="grid-container one">
       <div data-v-8db23f90="" class="query-box-wrapper">
         <div data-v-8db23f90="" class="relative">
@@ -12,7 +12,7 @@
             <div class="queryInputSearch-wrapper">
 
                 <div class="input-wrapper">
-                  <div id="textInput" contenteditable="true" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="[TARGET_URL]" data-gramm="false" class="query-input"></div></div><div class="button-wrapper focused"><button onclick="submitHiddenForm()" data-v-6c4e492a="" class="button" id="search-button" tabindex="0">&gt; Scan</button></div></div></div></div></div></div>
+                  <div id="textInput" contenteditable="true" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="[TARGET_URL]" data-gramm="false" class="query-input"></div></div><div class="button-wrapper focused"><button onclick="submitHiddenForm()" data-v-6c4e492a="" class="button" id="search-button" tabindex="0">&gt; SCAN</button></div></div></div></div></div></div>
 
   <div id="subButtons" style="transition: opacity 0.4s;" data-v-8db23f90="" class="grid-container anomalies-wrapper">
    <div data-v-8db23f90="" class="col">
@@ -60,109 +60,7 @@
 <%= form.submit "Scan", :style => 'visibility: hidden' %>
 
 
-  <script>
-    function submitHiddenForm() {
-      var url = document.getElementById("textInput").textContent;
-      document.getElementById("scan_URL").value = url;
-      document.getElementsByName('commit')[0].click();
-      startLoading();
-    }
 
-    async function startLoading() {
-      if (document.getElementById('textInput').textContent == "")
-            return;
-      document.getElementById('animlogo').beginElement();
-      document.getElementById('searchBar').style.opacity = '0';
-      document.getElementById('subButtons').style.opacity = '0';
-      document.getElementById('footer').style.opacity = '0';
-      await new Promise(resolve => setTimeout(resolve, 600));
-      document.getElementById('footer').textContent = "";
-      document.getElementById('searchBar').style.display = "none";
-      document.getElementById('subButtons').style.display = "none";
-      document.getElementById('footer').style.opacity = '1';
-      await new Promise(resolve => setTimeout(resolve, 600));
-      slowLoadFooter("[SCANNING]: ...........");
-      await new Promise(resolve => setTimeout(resolve, 2200));
-      randomLoaderFooter();
-    };
-
-    async function slowLoadFooter(inputstr) {
-          document.getElementById('footer').textContent = "";
-          charsArray = [...inputstr];
-          for (i=0; i < charsArray.length; i++) {
-              document.getElementById('footer').append(charsArray[i]);
-              await new Promise(resolve => setTimeout(resolve, 69));
-          }
-    };
-
-    async function randomLoaderFooter() {
-      var msToWait = Math.floor((Math.random() * 4242) + 6969);
-      for ( i=0; i < msToWait; i+=69) {
-        document.getElementById('footer').textContent = "[SCANNING]: " + i + " / " + msToWait;
-        await new Promise(resolve => setTimeout(resolve, 69));
-      }
-      document.getElementById('footer').textContent = "[SCANNING]: " + msToWait + " / " + msToWait;
-      document.getElementById('animlogo').endElement();
-      await new Promise(resolve => setTimeout(resolve, 1600));
-      slowLoadFooter("[DISENGAGING]");
-      await new Promise(resolve => setTimeout(resolve, 3200));
-      slowLoadFooter("[STANDBY]");
-    }
-
-    function toggleScreenshot() {
-      var screenshotButton = document.getElementsByClassName("baffled")[0];
-
-      if(screenshotButton.textContent == "[ENABLED]")
-        screenshotButton.textContent = "[DISABLED]";
-      else
-        screenshotButton.textContent = "[ENABLED]";
-
-      document.getElementById("scan_screenshot_enabled").click();
-    }
-
-    function toggleVT() {
-      var vtButton = document.getElementsByClassName("baffled")[1];
-
-      if(vtButton.textContent == "[ENABLED]")
-        vtButton.textContent = "[DISABLED]";
-      else
-        vtButton.textContent = "[ENABLED]";
-
-      document.getElementById("scan_virustotal_enabled").click();
-    }
-
-    function toggleWHOIS() {
-      var whoisButton = document.getElementsByClassName("baffled")[2];
-
-      if(whoisButton.textContent == "[ENABLED]")
-        whoisButton.textContent = "[DISABLED]";
-      else
-        whoisButton.textContent = "[ENABLED]";
-
-      document.getElementById("scan_whois_enabled").click();
-    }
-
-    function enableAllonLoad() {
-      document.getElementById("scan_screenshot_enabled").checked = true;
-      document.getElementById("scan_virustotal_enabled").checked = true;
-      document.getElementById("scan_whois_enabled").checked = true;
-    }
-  </script>
-
-  <script>
-    //enable all config options by default when the page loads
-    enableAllonLoad();
-
-    //listen for enter key
-    var urlinputbox = document.getElementById("textInput");
-    urlinputbox.addEventListener("keydown", function (e) {
-    if (e.keyCode === 13) {  //checks whether the pressed key is "Enter"
-        document.getElementById("search-button").click();
-      }
-    });
-  </script>
 
 
 <% end %>
-
-
