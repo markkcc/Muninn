@@ -43,17 +43,20 @@
     document.getElementById('animlogo').endElement();
     await new Promise(resolve => setTimeout(resolve, 1600));
     slowLoadFooter("[DISENGAGING]");
-    await new Promise(resolve => setTimeout(resolve, 3200));
+    await new Promise(resolve => setTimeout(resolve, 4200));
     slowLoadFooter("[STANDBY]");
   }
 
   function toggleScreenshot() {
     var screenshotButton = document.getElementsByClassName("baffled")[0];
 
-    if(screenshotButton.textContent == "[ENABLED]")
+    if(screenshotButton.textContent == "[ENABLED]") {
       screenshotButton.textContent = "[DISABLED]";
-    else
+      screenshotButton.style = "color: red";
+    } else {
       screenshotButton.textContent = "[ENABLED]";
+      screenshotButton.style = "color: lime";
+    }
 
     document.getElementById("scan_screenshot_enabled").click();
   }
@@ -61,10 +64,13 @@
   function toggleVT() {
     var vtButton = document.getElementsByClassName("baffled")[1];
 
-    if(vtButton.textContent == "[ENABLED]")
+    if(vtButton.textContent == "[ENABLED]") {
       vtButton.textContent = "[DISABLED]";
-    else
+      vtButton.style = "color: red";
+    } else {
       vtButton.textContent = "[ENABLED]";
+      vtButton.style = "color: lime";
+    }
 
     document.getElementById("scan_virustotal_enabled").click();
   }
@@ -72,10 +78,13 @@
   function toggleWHOIS() {
     var whoisButton = document.getElementsByClassName("baffled")[2];
 
-    if(whoisButton.textContent == "[ENABLED]")
+    if(whoisButton.textContent == "[ENABLED]") {
       whoisButton.textContent = "[DISABLED]";
-    else
+      whoisButton.style = "color: red";
+    } else {
       whoisButton.textContent = "[ENABLED]";
+      whoisButton.style = "color: lime";
+    }
 
     document.getElementById("scan_whois_enabled").click();
   }
