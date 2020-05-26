@@ -10,7 +10,7 @@ class ScansController < ApplicationController
     scan = params.fetch(:scan, "")
     #@scan.save
     #redirect_to @scan
-    
+
     if scan == nil or scan.to_s == "" or scan["URL"].to_s == ""
       redirect_to root_path
     end
@@ -80,6 +80,8 @@ class ScansController < ApplicationController
       whois_results = "404"
     rescue Whois::WebInterfaceError => wie
       whois_results = "404"
+    rescure Timeout::Error => toe
+      whois_results = "404"
     end
     return whois_results
   end
@@ -123,15 +125,15 @@ class ScansController < ApplicationController
         options.add_argument "--disable-dev-shm-usage" #Try avoiding memory issues by using disk (/tmp)
 
         driver = Selenium::WebDriver.for :chrome, options: options
-        
+
         driver.manage.timeouts.implicit_wait = global_timeout
         driver.manage.timeouts.script_timeout = global_timeout
         driver.manage.timeouts.page_load = global_timeout
-        
+
         driver.navigate.to @lookup_target
         sleep(4) #wait for dynamic content to load
         screenshot_base64 = driver.screenshot_as(:base64)
-        
+
         driver.quit
       rescue Selenium::WebDriver::Error::TimeoutError => toe
         logger.fatal toe

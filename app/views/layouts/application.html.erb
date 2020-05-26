@@ -1,5 +1,22 @@
 <!DOCTYPE html>
 <html>
+
+<!-- --------------------------------------------------------------- >
+
+888b     d888 888     888 888b    888 8888888 888b    888 888b    888
+8888b   d8888 888     888 8888b   888   888   8888b   888 8888b   888
+88888b.d88888 888     888 88888b  888   888   88888b  888 88888b  888
+888Y88888P888 888     888 888Y88b 888   888   888Y88b 888 888Y88b 888
+888 Y888P 888 888     888 888 Y88b888   888   888 Y88b888 888 Y88b888
+888  Y8P  888 888     888 888  Y88888   888   888  Y88888 888  Y88888
+888   "   888 Y88b. .d88P 888   Y8888   888   888   Y8888 888   Y8888
+888       888  "Y88888P"  888    Y888 8888888 888    Y888 888    Y888
+
+                    S    C    A    N    N    E    R
+
+<-------------------------------------------------------------------->
+
+
   <head>
     <title>Muninn</title>
     <%= csrf_meta_tags %>
@@ -8,12 +25,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag "blacknoise" %>
+    <%= stylesheet_link_tag "no-scrollbar" %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'muninn-helpers.js' %>
     <%= favicon_link_tag asset_path('raven.ico') %>
+
   </head>
 
-  <body onload="enableAllonLoad();">
+  <body onload="enableAllonLoad();" style="::-webkit-scrollbar { display: none; }">
 
 <!-- BEGIN HEADER NAV BAR -->
     <div id="app"><div class="container pt-4 pb-24">
@@ -39,6 +58,14 @@
     </div>
 <!-- END HEADER NAV BAR -->
 
+  <div data-v-8db23f90="">
+    <div data-v-8db23f90="" class="logo-wrapper">
+      <?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="180px" height="180px" viewBox="0 0 128 128" xml:space="preserve"><circle cx="64.13" cy="64.13" r="27.63" fill="#424242"/><path d="M64.13 18.5A45.63 45.63 0 1 1 18.5 64.13 45.63 45.63 0 0 1 64.13 18.5zm0 7.85a37.78 37.78 0 1 1-37.78 37.78 37.78 37.78 0 0 1 37.78-37.78z" fill-rule="evenodd" fill="#424242"/><g><path d="M95.25 17.4a56.26 56.26 0 0 0-76.8 13.23L12.1 26.2a64 64 0 0 1 87.6-15.17z" fill="#424242"/><path d="M95.25 17.4a56.26 56.26 0 0 0-76.8 13.23L12.1 26.2a64 64 0 0 1 87.6-15.17z" fill="#424242" transform="rotate(120 64 64)"/><path d="M95.25 17.4a56.26 56.26 0 0 0-76.8 13.23L12.1 26.2a64 64 0 0 1 87.6-15.17z" fill="#424242" transform="rotate(240 64 64)"/><animateTransform id="animlogo" begin="indefinite" attributeName="transform" type="rotate" from="0 64 64" to="120 64 64" dur="1920ms" repeatCount="indefinite"></animateTransform></g></svg>
+    </div>
+
     <%= yield %>
+
+  </div>
+
   </body>
 </html>

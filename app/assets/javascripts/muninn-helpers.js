@@ -19,7 +19,7 @@
     document.getElementById('subButtons').style.display = "none";
     document.getElementById('footer').style.opacity = '1';
     await new Promise(resolve => setTimeout(resolve, 600));
-    slowLoadFooter("[SCANNING]: ..........");
+    slowLoadFooter("[SCANNING]: ...........");
     await new Promise(resolve => setTimeout(resolve, 2200));
     randomLoaderFooter();
   };
@@ -34,12 +34,12 @@
   };
 
   async function randomLoaderFooter() {
-    var msToWait = Math.floor((Math.random() * 4242) + 6969);
-    for ( i=101; i < msToWait; i+=69) {
+    var msToWait = Math.floor((Math.random() * 4884) + 6969);
+    for ( i=1001; i < msToWait; i+=69) {
       document.getElementById('footer').textContent = "[SCANNING]: " + i + " / " + msToWait;
       await new Promise(resolve => setTimeout(resolve, 69));
     }
-    document.getElementById('footer').textContent = "[SCANNING]: " + msToWait + " / " + msToWait;
+    document.getElementById('footer').textContent = "[SCANNING]: COMPLETE!";
     document.getElementById('animlogo').endElement();
     await new Promise(resolve => setTimeout(resolve, 1600));
     slowLoadFooter("[DISENGAGING]");
