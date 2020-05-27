@@ -80,7 +80,7 @@ class ScansController < ApplicationController
       whois_results = "404"
     rescue Whois::WebInterfaceError => wie
       whois_results = "404"
-    rescure Timeout::Error => toe
+    rescue Timeout::Error => toe
       whois_results = "404"
     end
     return whois_results
