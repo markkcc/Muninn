@@ -59,8 +59,7 @@ gem 'selenium-webdriver'
 gem 'whois'
 gem 'virustotalx'
 gem 'public_suffix'
+gem 'shodanz'
 
 # Heroku-specific
 gem 'sqreen', '>= 1.16'
-
-

@@ -1,7 +1,12 @@
-<p><h2>Scan for <%= @lookup_target %></h2>
+<h2>Scan for <%= @lookup_target %></h2>
+Rendered at: <%= Time.now.utc %>
 <br>
-Rendered at: <%= Time.now.utc %></p>
-<br>
+
+<% if @shodan != "404" %>
+  <%= render partial: 'shodan' %>
+<% else %>
+  <p><h3 style="color: red">Shodan Lookup Failed: No data received.</h3></p>
+<% end %>
 
 <% if params[:scan]["screenshot_enabled"] == "1" %>
   <% if @screenshot != "" %>

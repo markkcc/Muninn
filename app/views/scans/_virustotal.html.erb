@@ -1,36 +1,36 @@
-<p> <h2>VirusTotal:</h2> <br><br>
+<h2>VirusTotal:</h2> <br><br>
 <b>Link:</b> <a href="<%= "https://www.virustotal.com/gui/url/" + @virustotaldata["data"]["id"].to_s + "/detection" %>"><%= "https://www.virustotal.com/gui/url/" + @virustotaldata["data"]["id"].to_s + "/detection" %></a> <br><br>
 
-<b>-=-=-= Analysis =-=-=-
+<b>Analysis</b>
 <pre><code data-v-8db23f90="">
 Last anaylsis date: <%= @virustotaldata["data"]["attributes"]["last_analysis_date"] %>
-Last analysis stats: 
+Last analysis stats:
 <% if not @virustotaldata["data"]["attributes"]["last_analysis_stats"].inspect == "nil" %>
   <% @virustotaldata["data"]["attributes"]["last_analysis_stats"].each do |k,v| %>
-    &nbsp;&nbsp;<%= k %>: <%= v %> 
+    &nbsp;&nbsp;<%= k %>: <%= v %>
   <% end %>
 </code></pre>
 <% end %>
 
-<b>-=-=-= Last HTTP Response =-=-=-</b>
-<pre><code class="bash hljs">
-Final URL: <%= @virustotaldata["data"]["attributes"]["last_final_url"] %> 
-Status Code: <%= @virustotaldata["data"]["attributes"]["last_https_response_code"] %> 
-Content Length: <%= @virustotaldata["data"]["attributes"]["last_http_response_content_length"] %> 
-Body SHA-256: <%= @virustotaldata["data"]["attributes"]["last_http_response_content_sha256"] %> 
+<b>Last HTTP Response</b>
+<pre><code data-v-8db23f90="">
+Final URL: <%= @virustotaldata["data"]["attributes"]["last_final_url"] %>
+Status Code: <%= @virustotaldata["data"]["attributes"]["last_https_response_code"] %>
+Content Length: <%= @virustotaldata["data"]["attributes"]["last_http_response_content_length"] %>
+Body SHA-256: <%= @virustotaldata["data"]["attributes"]["last_http_response_content_sha256"] %>
 </code></pre>
 <br>
 HTTP Cookies: <br>
-<pre><code class="bash hljs">
+<pre><code data-v-8db23f90="">
 <% if not  @virustotaldata["data"]["attributes"]["last_http_response_cookies"].inspect == "nil" %>
   <% @virustotaldata["data"]["attributes"]["last_http_response_cookies"].each do |k,v| %>
-    &nbsp;&nbsp;<%= k %>: <%= v %> 
+    &nbsp;&nbsp;<%= k %>: <%= v %>
   <% end %>
 <% end %>
 </code></pre>
 <br>
 HTTP Headers:
-<pre><code class="bash hljs">
+<pre><code data-v-8db23f90="">
 <% if not @virustotaldata["data"]["attributes"]["last_http_response_headers"].inspect == "nil" %>
   <% @virustotaldata["data"]["attributes"]["last_http_response_headers"].each do |k,v| %>
     &nbsp;&nbsp;<%= k %>: <%= v %>
@@ -38,4 +38,3 @@ HTTP Headers:
 <% end %>
 </code></pre>
 <br>
-

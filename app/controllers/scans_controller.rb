@@ -14,11 +14,29 @@ class ScansController < ApplicationController
     if scan == nil or scan.to_s == "" or scan["URL"].to_s == ""
       redirect_to root_path
     end
+
     @lookup_target = validate_url(scan["URL"])
+    @domain = get_domain(@lookup_target)
+    @ip_addr = ""
+    @shodan = "404"
+
+    begin
+      shodanclient = Shodanz.client.new
+      @ip_addr = shodanclient.resolve(@domain).first[1]
+      @shodan = shodanclient.host(@ip_addr, minify: true)
+    rescue Shodanz::Errors => se
+      @shodan = "404"
+      logger.info "Shodan Failed!"
+    rescue RuntimeError => rte
+      @shodan = "404"
+      logger.fatal rte
+    end
+
 
     if @lookup_target == ""
       @virustotaldata = "404"
       @whoisdata = "404"
+      @shodan = "404"
       @screenshot = ""
     end
     @whoisdata = get_whoisdata(@lookup_target) unless params[:scan]["whois_enabled"] != "1" or @lookup_target == ""
@@ -67,6 +85,17 @@ class ScansController < ApplicationController
     url = "https://" + url unless url.downcase.start_with?("http://") or url.downcase.start_with?("https://")
     return URI.escape(url).to_s unless url == "https://" #default value, return empty
     return ""
+  end
+
+  def get_domain(lookup_target)
+    begin
+      domain = PublicSuffix.domain(URI(lookup_target).host, ignore_private: true).to_s
+    rescue URI::InvalidURIError => iue
+      domain = ""
+    rescue Timeout::Error => toe
+      domain = ""
+    end
+    return domain
   end
 
   def get_whoisdata(lookup_target)

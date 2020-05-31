@@ -1,0 +1,55 @@
+<br>
+
+IP Address:
+<code>
+  <%= @shodan["ip_str"] %>
+</code><br>
+
+Organization:
+<code data-v-8db23f90="">
+  <%= @shodan["org"] %>
+</code><br>
+
+ASN:
+<code data-v-8db23f90="">
+  <%= @shodan["asn"] %>
+</code><br>
+
+Country:
+<code data-v-8db23f90="">
+  <%= @shodan["country_name"] %>
+</code><br>
+
+Coordinates (lat, lon):
+<code data-v-8db23f90="">
+  <%= @shodan["latitude"].to_s %>, <%= @shodan["longitude"].to_s %>
+</code><br>
+
+<h2>Shodan:</h2>
+
+Last scanned:
+<%= @shodan["last_update"] %>
+<br>
+
+Hostnames:
+<% if not @shodan["hostnames"].inspect == "nil" %>
+  <% @shodan["hostnames"].each do |k,v| %>
+    &nbsp;&nbsp;<%= k %>
+  <% end %>
+<% end %>
+<br>
+
+Domains:
+<% if not @shodan["domains"].inspect == "nil" %>
+  <% @shodan["domains"].each do |k,v| %>
+    &nbsp;&nbsp;<%= k %>
+  <% end %>
+<% end %>
+<br>
+
+Ports:<br>
+<% if not @shodan["ports"].inspect == "nil" %>
+  <% @shodan["ports"].each do |k,v| %>
+    &nbsp;&nbsp;<%= k %><br>
+  <% end %>
+<% end %>

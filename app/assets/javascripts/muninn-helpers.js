@@ -55,7 +55,7 @@
       screenshotButton.style = "color: red";
     } else {
       screenshotButton.textContent = "[ENABLED]";
-      screenshotButton.style = "color: lime";
+      screenshotButton.style = "color: #bfbfbf;";
     }
 
     document.getElementById("scan_screenshot_enabled").click();
@@ -69,7 +69,7 @@
       vtButton.style = "color: red";
     } else {
       vtButton.textContent = "[ENABLED]";
-      vtButton.style = "color: lime";
+      vtButton.style = "color: #bfbfbf;";
     }
 
     document.getElementById("scan_virustotal_enabled").click();
@@ -83,7 +83,7 @@
       whoisButton.style = "color: red";
     } else {
       whoisButton.textContent = "[ENABLED]";
-      whoisButton.style = "color: lime";
+      whoisButton.style = "color: #bfbfbf;";
     }
 
     document.getElementById("scan_whois_enabled").click();
