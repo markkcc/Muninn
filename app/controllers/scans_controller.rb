@@ -24,12 +24,27 @@ class ScansController < ApplicationController
       shodanclient = Shodanz.client.new
       @ip_addr = shodanclient.resolve(@domain).first[1]
       @shodan = shodanclient.host(@ip_addr, minify: true)
-    rescue Shodanz::Errors => se
+    rescue Shodanz::Errors::NoAPIKey => nak
       @shodan = "404"
-      logger.info "Shodan Failed!"
+      logger.faral nak
     rescue RuntimeError => rte
       @shodan = "404"
       logger.fatal rte
+    rescue Shodanz::Errors::RateLimited => srl
+      @shodan = "404"
+      logger.fatal srl
+    rescue Shodanz::Errors::NoInformation => sni
+      @shodan = "404"
+      logger.fatal sni
+    rescue Shodanz::Errors::NoQuery => snq
+      @shodan = "404"
+      logger.fatal snq
+    rescue Shodanz::Errors::AccessDenied  => sad
+      @shodan = "404"
+      logger.fatal sad
+    rescue Shodanz::Errors::InvalidKey  => sik
+      @shodan = "404"
+      logger.fatal sik
     end
 
 
