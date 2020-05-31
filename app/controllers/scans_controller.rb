@@ -26,7 +26,7 @@ class ScansController < ApplicationController
       @shodan = shodanclient.host(@ip_addr, minify: true)
     rescue Shodanz::Errors::NoAPIKey => nak
       @shodan = "404"
-      logger.faral nak
+      logger.fatal nak
     rescue RuntimeError => rte
       @shodan = "404"
       logger.fatal rte
