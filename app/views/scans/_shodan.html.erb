@@ -1,23 +1,29 @@
 <br>
 
+<h2>Shodan DNS Data (loadbalancer/proxy):</h2>
+
+Last scanned:
+<%= @shodan["last_update"].to_s %>
+<br>
+
 IP Address:
 <code>
-  <%= @shodan["ip_str"] %>
+  <%= @shodan["ip_str"].to_s %>
 </code><br>
 
 Organization:
 <code data-v-8db23f90="">
-  <%= @shodan["org"] %>
+  <%= @shodan["org"].to_s %>
 </code><br>
 
 ASN:
 <code data-v-8db23f90="">
-  <%= @shodan["asn"] %>
+  <%= @shodan["asn"].to_s %>
 </code><br>
 
 Country:
 <code data-v-8db23f90="">
-  <%= @shodan["country_name"] %>
+  <%= @shodan["country_name"].to_s %>
 </code><br>
 
 Coordinates (lat, lon):
@@ -25,16 +31,10 @@ Coordinates (lat, lon):
   <%= @shodan["latitude"].to_s %>, <%= @shodan["longitude"].to_s %>
 </code><br>
 
-<h2>Shodan:</h2>
-
-Last scanned:
-<%= @shodan["last_update"] %>
-<br>
-
 Hostnames:
 <% if not @shodan["hostnames"].inspect == "nil" %>
   <% @shodan["hostnames"].each do |k,v| %>
-    &nbsp;&nbsp;<%= k %>
+    &nbsp;&nbsp;<%= k.to_s %>
   <% end %>
 <% end %>
 <br>
@@ -42,7 +42,7 @@ Hostnames:
 Domains:
 <% if not @shodan["domains"].inspect == "nil" %>
   <% @shodan["domains"].each do |k,v| %>
-    &nbsp;&nbsp;<%= k %>
+    &nbsp;&nbsp;<%= k.to_s %>
   <% end %>
 <% end %>
 <br>
@@ -50,6 +50,61 @@ Domains:
 Ports:<br>
 <% if not @shodan["ports"].inspect == "nil" %>
   <% @shodan["ports"].each do |k,v| %>
-    &nbsp;&nbsp;<%= k %><br>
+    &nbsp;&nbsp;<%= k.to_s %><br>
   <% end %>
+<% end %>
+<br>
+
+
+<% if not (@shodan_query_data == nil or @shodan_query_data["matches"][0].inspect == "nil" or @shodan_query_data["matches"].inspect == "nil") %>
+
+<h2>Shodan Header Match:</h2>
+
+<i>Note: Shown below is the first result for a Shodan query where any HTTP header contains the target domain name.<br>
+This result may be irrelevant to your search.</i>
+<br><br>
+
+  Hostname: <%= @shodan_query_data["matches"][0]["_shodan"]["options"]["hostname"].to_s + " (module: " + @shodan_query_data["matches"][0]["_shodan"]["module"].to_s + " | " + @shodan_query_data["matches"][0]["transport"].to_s + ")" %> <br>
+
+  IP Address: <%= @shodan_query_data["matches"][0]["ip_str"].to_s %> <br>
+
+  ASN: <%= @shodan_query_data["matches"][0]["asn"].to_s %> <br>
+
+  Organization: <%= @shodan_query_data["matches"][0]["org"].to_s %> <br>
+
+  ISP: <%= @shodan_query_data["matches"][0]["isp"].to_s %> <br>
+
+  <% if not @shodan_query_data["matches"][0]["http"] == nil %>
+
+    WAF: <%= @shodan_query_data["matches"][0]["http"]["waf"].to_s %> <br>
+
+    Server: <code style="white-space: pre-wrap;"><%= @shodan_query_data["matches"][0]["http"]["server"].to_s %></code> <br>
+
+    <% if not @shodan_query_data["matches"][0]["http"]["components"].inspect == "nil" %>
+      Components:
+        <% @shodan_query_data["matches"][0]["http"]["components"].each do |k,v| %>
+          [<%= k.to_s %>]&nbsp;
+        <% end %> <br>
+    <% end %>
+
+  <% end %>
+
+  Country: <%= @shodan_query_data["matches"][0]["location"]["country_name"].to_s %> <br>
+
+  Coordinates (lat, lon): <%= @shodan_query_data["matches"][0]["location"]["latitude"].to_s + ", " + @shodan_query_data["matches"][0]["location"]["longitude"].to_s %> <br>
+
+  Port: <%= @shodan_query_data["matches"][0]["port"].to_s %> <br>
+
+  <% if @shodan_query_data["matches"][0]["ssl"] != nil and @shodan_query_data["matches"][0]["port"] == 443 %>
+    SSL/TLS Versions: <% @shodan_query_data["matches"][0]["ssl"]["versions"] %> <br>
+  <% end %>
+
+  Last Shodan scan: <%= @shodan_query_data["matches"][0]["timestamp"].to_s %> <br>
+
+  <br>
+  HTTP Headers:
+<code style="white-space: pre-wrap;">
+<%= @shodan_query_data["matches"][0]["data"].to_s %>
+</code>
+
 <% end %>

@@ -1,33 +1,75 @@
-<h2>Scan for <%= @lookup_target %></h2>
+<h2>[ SCANNED: <%= @lookup_target %> ]</h2>
 Rendered at: <%= Time.now.utc %>
-<br>
+<br><br>
 
-<% if @shodan != "404" %>
-  <%= render partial: 'shodan' %>
+Module status:<br><br>
+
+Screenshot:
+<% if params[:scan]["screenshot_enabled"] == "1" %>
+  <% if @screenshot == "" %>
+    &emsp;&emsp;&emsp;&emsp;&#8194;[FAILED]
+  <% else %>
+    &emsp;&emsp;&emsp;&emsp;&#8194;[SUCCESS]
+  <% end %>
 <% else %>
-  <p><h3 style="color: red">Shodan Lookup Failed: No data received.</h3></p>
-<% end %>
+&emsp;&emsp;&emsp;&emsp;&#8194;[DISABLED]
+<% end %> <br>
+
+Shodan Query:
+<% if @shodan_query_data == nil or @shodan_query_data["matches"].inspect == "nil" or @shodan_query_data["matches"][0].inspect == "nil" %>
+  &emsp;&emsp;&emsp;[FAILED]
+<% else %>
+  &emsp;&emsp;&emsp;[SUCCESS]
+<% end %> <br>
+
+Shodan DNS Data:
+<% if @shodan == "404" %>
+  &#8194;[FAILED]
+<% else %>
+  &#8194;[SUCCESS]
+<% end %> <br>
+
+VirusTotal:
+<% if params[:scan]["virustotal_enabled"] == "1" %>
+  <% if @virustotaldata == "404" %>
+    &emsp;&emsp;&emsp;&emsp;&#8194;[FAILED]
+  <% else %>
+    &emsp;&emsp;&emsp;&emsp;&#8194;[SUCCESS]
+  <% end %>
+<% else %>
+&emsp;&emsp;&emsp;&emsp;&#8194;[DISABLED]
+<% end %> <br>
+
+WHOIS:
+<% if params[:scan]["whois_enabled"] == "1" %>
+  <% if @whoisdata == "404" %>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#8194;&#8194;[FAILED]
+  <% else %>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#8194;&#8194;[SUCCESS]
+  <% end %>
+<% else %>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#8194;&#8194;[DISABLED]
+<% end %> <br>
+
 
 <% if params[:scan]["screenshot_enabled"] == "1" %>
   <% if @screenshot != "" %>
     <%= render partial: 'screenshot' %>
-  <% else %>
-    <p><h3 style="color: red">Screenshot Failed: No data received.</h3></p>
   <% end %>
+<% end %>
+
+<% if @shodan != "404" %>
+  <%= render partial: 'shodan' %>
 <% end %>
 
 <% if params[:scan]["virustotal_enabled"] == "1" %>
   <% if @virustotaldata != "404" %>
     <%= render partial: 'virustotal' %>
-  <% else %>
-    <p><h3 style="color: red">VirusTotal Query Failed: Server not found.</h3></p>
   <% end %>
 <% end %>
 
 <% if params[:scan]["whois_enabled"] == "1" %>
   <% if @whoisdata != "404" %>
     <%= render partial: 'whois' %>
-  <% else %>
-    <p><h3 style="color: red">WHOIS Failed: Server not found.</h3></p>
   <% end %>
 <% end %>

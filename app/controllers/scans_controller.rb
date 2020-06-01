@@ -24,6 +24,7 @@ class ScansController < ApplicationController
       shodanclient = Shodanz.client.new
       @ip_addr = shodanclient.resolve(@domain).first[1]
       @shodan = shodanclient.host(@ip_addr, minify: true)
+      @shodan_query_data = shodanclient.host_search(@domain)
     rescue Shodanz::Errors::NoAPIKey => nak
       @shodan = "404"
       logger.fatal nak
