@@ -183,7 +183,7 @@ GEM
     shodanz (2.0.3)
       async (>= 1.17.1, < 1.25.0)
       async-http (>= 0.38.1, < 0.51.0)
-    spring (2.1.0)
+    spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
       spring (>= 1.2, < 3.0)
