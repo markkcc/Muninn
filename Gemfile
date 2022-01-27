@@ -10,7 +10,7 @@ gem 'rails', '~> 6.0.3'
 # We're using pg instead of sqlite3 because of Heroku requirements
 gem 'pg'
 # Use Puma as the app server
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 5.6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
