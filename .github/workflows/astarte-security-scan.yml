@@ -1,0 +1,28 @@
+name: Astarte Security Scan
+
+on:
+  pull_request:
+    branches: [ main, master, develop ]
+  push:
+    branches: [ main, master ]
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Astarte Security Scan
+        uses: Astarte-Security/astarte-scanner-action@v0.1
+        with:
+          aspm_url: https://astarte-security.com
+          app_id: ${{ secrets.ASPM_APP_ID }}
+          private_key: ${{ secrets.ASPM_PRIVATE_KEY }}
+          installation_id: ${{ secrets.ASPM_INSTALLATION_ID }}
+          webhook_token: ${{ secrets.ASPM_WEBHOOK_TOKEN }}
