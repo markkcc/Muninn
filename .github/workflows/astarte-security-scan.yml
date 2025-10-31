@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Astarte Security Scan
-        uses: Astarte-Security/astarte-scanner-action@v0.1
+        uses: Astarte-Security/astarte-scanner-action@v0.2
         with:
           aspm_url: https://astarte-security.com
           app_id: ${{ secrets.ASPM_APP_ID }}
